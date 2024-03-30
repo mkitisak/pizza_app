@@ -2,7 +2,13 @@ plugins {
     id "com.android.application"
     id "kotlin-android"
     id "dev.flutter.flutter-gradle-plugin"
-    id "com.google.gms.google-services"
+    //id "com.google.gms.google-services"
+
+    //KTM 20240330 Based on https://console.firebase.google.com/project/myfirebasecloudauth/overview
+    // Add the dependency for the Google services Gradle plugin
+    //id("com.google.gms.google-services") version "4.4.1" apply false
+    id("com.google.gms.google-services") //version "4.4.1" apply false
+
 }
 
 def localProperties = new Properties()
@@ -50,6 +56,7 @@ android {
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+        multiDexEnabled true    //KTM 20240330 Added to fix error  :  .dex file cannot exceed 64K.
     }
 
     buildTypes {
@@ -67,4 +74,5 @@ flutter {
 
 dependencies {
     implementation(platform("com.google.firebase:firebase-bom:32.3.1"))
+    implementation 'com.android.support:multidex:2.0.1'
 }

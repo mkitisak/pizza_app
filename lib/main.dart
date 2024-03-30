@@ -7,7 +7,14 @@ import 'package:user_repository/user_repository.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  
+  try {
   await Firebase.initializeApp();
+  } catch (e) {
+    print('Error initializing Firebase: $e');
+  }
+
   Bloc.observer = SimpleBlocObserver();
   runApp(MyApp(FirebaseUserRepo()));
 }
